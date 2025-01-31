@@ -1,6 +1,6 @@
-let s = {
+const s = {
   s: '1',
-    l: 's'
-}
+  l: 's'
+};
 
-  console.log('first')
+console.log('first');

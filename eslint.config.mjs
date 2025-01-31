@@ -15,5 +15,10 @@ export default [
     files: ['**/*.vue'],
     languageOptions: { parserOptions: { parser: tseslint.parser } }
   },
-  eslintPluginPrettier
+  eslintPluginPrettier,
+  {
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'warn'
+    }
+  }
 ];
