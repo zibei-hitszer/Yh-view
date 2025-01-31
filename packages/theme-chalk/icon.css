@@ -1,0 +1,10 @@
+.yh-icon {
+  --yh-icon-color: inherit;
+  color: var(--yh-icon-color);
+}
+
+@each $val in primary, danger, info, success, warning {
+  .yh-icon--$(val) {
+    --yh-icon-color: var(--yh-color-$(val));
+  }
+}

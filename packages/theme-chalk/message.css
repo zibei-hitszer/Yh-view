@@ -1,0 +1,42 @@
+.yh-message {
+  --yh-message-bg-color: var(--yh-color-info-light-9);
+  --yh-message-border-color: var(--yh-border-color-lighter);
+  --yh-message-text-color: var(--yh-text-color-regular);
+}
+
+.yh-message {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background: var(--yh-message-bg-color);
+  border: 1px solid var(--yh-message-border-color);
+  border-radius: var(--yh-border-radius-small);
+  color: var(--yh-message-text-color);
+  transition:
+    top 0.3s,
+    opacity 0.3s,
+    transform 0.3s;
+
+  .yh-message__closemark {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+
+  &.fade-up-enter-from,
+  &.fade-up-leave-to {
+    opacity: 0;
+    transform: translate(-50%, -100%);
+  }
+}
+@each $val in info, success, danger, warning {
+  .yh-message--$(val) {
+    --yh-message-bg-color: var(--yh-color-$(val)-light-9);
+    --yh-message-border-color: var(--yh-color$(val)-ligh-7);
+    --yh-message-text-color: var(--yh-color-$(val));
+  }
+}

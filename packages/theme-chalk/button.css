@@ -1,0 +1,131 @@
+.yh-button {
+  --yh-button-text-color: var(--yh-text-color-regular);
+  --yh-button-border-color: var(--yh-border-color);
+  --yh-button-bg-color: var(--yh-bg-color);
+  --yh-button-hover-text-color: var(--yh-color-primary);
+  --yh-button-hover-border-color: var(--yh-color-primary-light-7);
+  --yh-button-hover-bg-color: var(--yh-color-primary-light-9);
+  --yh-button-active-text-color: var(--yh-button-hover-text-color);
+  --yh-button-active-border-color: var(--yh-color-primary);
+  --yh-button-active-bg-color: var(--yh-button-hover-bg-color);
+  --yh-button-disabled-text-color: var(--yh-disabled-text-color);
+  --yh-button-disabled-bg-color: var(--yh-fill-color-blank);
+  --yh-button-disabled-border-color: var(--yh-border-color-light);
+  --yh-button-font-weight: var(--yh-font-weight-primary);
+}
+
+.yh-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  padding: 8px 15px;
+  height: 32px;
+  line-height: 1;
+  color: var(--yh-button-text-color);
+  border: var(--yh-border);
+  border-color: var(--yh-button-border-color);
+  background-color: var(--yh-button-bg-color);
+  border-radius: var(--yh-border-radius-base);
+  font-size: var(--yh-font-size-base);
+  font-weight: var(--yh-button-font-weight);
+  vertical-align: middle;
+  cursor: pointer;
+
+  & + & {
+    margin-left: 12px;
+  }
+
+  &:hover {
+    color: var(--yh-button-hover-text-color);
+    border-color: var(--yh-button-hover-border-color);
+    background-color: var(--yh-button-hover-bg-color);
+  }
+
+  &:active {
+    color: var(--yh-button-active-text-color);
+    border-color: var(--yh-button-active-border-color);
+    background-color: var(--yh-button-active-bg-color);
+  }
+
+  &.is-plain {
+    --yh-button-hover-text-color: var(--yh-color-primary);
+    --yh-button-hover-border-color: var(--yh-color-primary);
+    --yh-button-hover-bg-color: var(--yh-fill-color-blank);
+  }
+
+  &.is-round {
+    border-radius: var(--yh-border-radius-round);
+  }
+
+  &.is-circle {
+    border-radius: var(--yh-border-radius-circle);
+  }
+
+  /*disabled*/
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus,
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:focus {
+    color: var(--yh-button-disabled-text-color);
+    cursor: not-allowed;
+    background-image: none;
+    background-color: var(--yh-button-disabled-bg-color);
+    border-color: var(--yh-button-disabled-border-color);
+  }
+
+  [class*='yh-icon'] + span {
+    margin-left: 6px;
+  }
+}
+
+@each $val in primary, danger, info, success, warning {
+  .yh-button--$(val) {
+    --yh-button-text-color: var(--yh-color-white);
+    --yh-button-border-color: var(--yh-color-$(val));
+    --yh-button-bg-color: var(--yh-color-$(val));
+    --yh-button-hover-text-color: var(--yh-color-white);
+    --yh-button-hover-border-color: var(--yh-color-$(val)-light-3);
+    --yh-button-hover-bg-color: var(--yh-color-$(val)-light-3);
+    --yh-button-active-text-color: var(--yh-color-white);
+    --yh-button-active-border-color: var(--yh-color-$(val)-dark-2);
+    --yh-button-active-bg-color: var(--yh-color-$(val)-dark-2);
+  }
+
+  .yh-button--$(val).is-plain {
+    --yh-button-text-color: var(--yh-color-$(val));
+    --yh-button-border-color: var(--yh-color-$(val));
+    --yh-button-bg-color: var(--yh-color-$(val)-light-9);
+    --yh-button-hover-text-color: var(--yh-color-white);
+    --yh-button-hover-border-color: var(--yh-color-$(val));
+    --yh-button-hover-bg-color: var(--yh-color-$(val));
+    --yh-button-active-text-color: var(--yh-color-white);
+    --yh-button-active-border-color: var(--yh-color-$(val)-dark-2);
+    --yh-button-active-bg-color: var(--yh-color-$(val)-dark-2);
+  }
+  .yh-button--$(val).is-disabled {
+    --yh-button-disabled-text-color: var(--yh-button-text-color);
+    --yh-button-disabled-bg-color: var(--yh-color-$(val)-light-5);
+    --yh-button-disabled-border-color: var(--yh-color-$(val)-light-5);
+  }
+
+  .yh-button--$(val).is-disabled.is-plain {
+    --yh-button-disabled-text-color: var(--yh-color-$(val)-light-5);
+    --yh-button-disabled-bg-color: var(--yh-color-$(val)-light-9);
+    --yh-button-disabled-border-color: var(--yh-color-$(val)-light-8);
+  }
+}
+
+.yh-button--small {
+  height: 24px;
+  padding: 5px 11px;
+  font-size: var(--yh-font-size-extra-small);
+}
+
+.yh-button--large {
+  height: 40px;
+  padding: 12px 19px;
+  font-size: var(--yh-font-size-base);
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@yh-ui/components",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@yh-ui/theme-chalk": "workspace:^1.0.0",
+    "@yh-ui/utils": "workspace:^1.0.0"
+  }
+}
