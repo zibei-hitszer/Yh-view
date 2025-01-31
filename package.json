@@ -18,6 +18,15 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{css,scss}": [
+      "prettier --write"
+    ]
+  },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@types/lodash-es": "^4.17.12",
