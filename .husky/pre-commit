@@ -1,1 +1,1 @@
-VITEST_WATCH=false pnpm test
+pnpm test
