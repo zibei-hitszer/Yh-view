@@ -4,3 +4,4 @@ const s = {
 };
 
 console.log('first');
+const c = 1;
