@@ -1,35 +1,57 @@
 {
-  "name": "yh-ui",
+  "name": "@zbhyh/demo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
+  "main": "dist/yh-ui.cjs.js",
+  "module": "dist/yh-ui.es.js",
+  "unpkg": "dist/yh-ui.umd.js",
+  "jsdelivr": "dist/yh-ui.umd.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/yh-ui.es.js",
+      "require": "./dist/yh-ui.cjs.js"
+    },
+    "./theme": {
+      "import": "./dist/theme/yh-ui.css",
+      "require": "./dist/theme/yh-ui.css"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "test": "vitest",
     "dev": "vite ",
+    "build": "vite build",
     "start": "pnpm run docs:dev",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
-    "prettier": "prettier --write .",
+    "format": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepublishOnly": "pnpm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "lint-staged": {
-    "*.{js,ts,vue}": [
+    "!dist/**/*.{js,ts,vue}": [
       "prettier --write",
       "eslint --fix"
     ],
-    "*.{css,scss}": [
+    "!dist/**/*.{css,scss}": [
       "prettier --write"
     ]
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@types/lodash-es": "^4.17.12",
+    "@types/node": "^22.13.0",
     "@typescript-eslint/eslint-plugin": "^8.20.0",
     "@typescript-eslint/parser": "^8.20.0",
     "@vitejs/plugin-vue": "^5.2.1",
@@ -51,8 +73,10 @@
     "sass-embedded": "^1.83.4",
     "typescript": "^5.7.3",
     "vite": "^6.0.7",
+    "vite-plugin-dts": "^4.5.0",
     "vitepress": "^1.6.3",
-    "vitest": "^3.0.3"
+    "vitest": "^3.0.3",
+    "typescript-eslint": "^8.22.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -61,7 +85,6 @@
     "@popperjs/core": "^2.11.8",
     "globals": "^15.14.0",
     "lodash-es": "^4.17.21",
-    "typescript-eslint": "^8.22.0",
     "vue": "^3.5.13"
   }
 }

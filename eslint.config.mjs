@@ -20,5 +20,8 @@ export default [
     rules: {
       '@typescript-eslint/no-unused-vars': 'warn'
     }
+  },
+  {
+    ignores: ['dist/**', 'node_modules/**']
   }
 ];
