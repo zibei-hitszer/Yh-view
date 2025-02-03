@@ -40,11 +40,11 @@
   "author": "",
   "license": "ISC",
   "lint-staged": {
-    "!dist/**/*.{js,ts,vue}": [
+    "*.{js,ts,vue}": [
       "prettier --write",
       "eslint --fix"
     ],
-    "!dist/**/*.{css,scss}": [
+    "*.{css,scss}": [
       "prettier --write"
     ]
   },
