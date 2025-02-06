@@ -1,6 +1,6 @@
 {
   "name": "yh-view",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "type": "module",
   "main": "build/yh-ui.umd.js",
