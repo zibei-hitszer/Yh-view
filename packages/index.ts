@@ -4,4 +4,4 @@ export * from './components';
 import YHUI from './components';
 export default YHUI;
 export * from './utils';
-import './theme-chalk/index.css'; // 导入所有样式
+import '@yh-ui/theme-chalk/index.css'; // 导入所有样式

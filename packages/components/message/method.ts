@@ -1,6 +1,6 @@
 import { h, render, shallowReactive } from 'vue';
-import type { createMessageProps, messageContext, messageProps } from './type';
-import Message from '.';
+import type { createMessageProps, messageContext } from './type';
+import { Message } from '.';
 import { useZIndex } from '@yh-ui/utils';
 
 let seed = 0;

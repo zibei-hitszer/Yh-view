@@ -1,31 +1,35 @@
 {
-  "name": "@zbhyh/demo",
+  "name": "yh-view",
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "dist/yh-ui.cjs.js",
-  "module": "dist/yh-ui.es.js",
-  "unpkg": "dist/yh-ui.umd.js",
-  "jsdelivr": "dist/yh-ui.umd.js",
-  "types": "dist/types/index.d.ts",
+  "main": "build/yh-ui.umd.js",
+  "module": "build/index.js",
+  "unpkg": "build/yh-ui.umd.js",
+  "jsdelivr": "build/yh-ui.umd.js",
+  "types": "build/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/yh-ui.es.js",
-      "require": "./dist/yh-ui.cjs.js"
+      "import": "./build/index.js",
+      "require": "./build/yh-ui.umd.js"
     },
     "./theme": {
-      "import": "./dist/theme/yh-ui.css",
-      "require": "./dist/theme/yh-ui.css"
-    }
+      "import": "./build/yh-ui.css",
+      "require": "./build/yh-ui.css"
+    },
+    "./resolver": {
+      "import": "./build/resolver/YHViewResolver.js"
+    },
+    "./*": "./build/*"
   },
   "files": [
-    "dist",
+    "build",
     "README.md"
   ],
   "scripts": {
     "test": "vitest",
     "dev": "vite ",
-    "build": "vite build",
+    "build": "cd script && node build.js",
     "start": "pnpm run docs:dev",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
@@ -33,8 +37,7 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky",
-    "prepublishOnly": "pnpm run build"
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
@@ -72,11 +75,12 @@
     "prettier": "^3.4.2",
     "sass-embedded": "^1.83.4",
     "typescript": "^5.7.3",
+    "typescript-eslint": "^8.22.0",
+    "unplugin-vue-components": "^28.0.0",
     "vite": "^6.0.7",
     "vite-plugin-dts": "^4.5.0",
     "vitepress": "^1.6.3",
-    "vitest": "^3.0.3",
-    "typescript-eslint": "^8.22.0"
+    "vitest": "^3.0.3"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",

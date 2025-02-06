@@ -2,8 +2,11 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
-// import { injectStyle } from './script/plugin';
-
+import { fileURLToPath } from 'url';
+import path from 'path';
+const __filename = fileURLToPath(import.meta.url);
+// 获取当前文件所在的目录路径
+const __dirname = path.dirname(__filename);
 export default defineConfig({
   plugins: [
     vue(),
@@ -15,7 +18,7 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'packages/index.ts'),
+      entry: resolve(__dirname, 'packages/components/index.ts'),
       name: 'YHUI',
       formats: ['es', 'cjs', 'umd'],
       fileName: (format) => `yh-ui.${format}.js`
@@ -23,16 +26,13 @@ export default defineConfig({
     rollupOptions: {
       external: ['vue'],
       input: {
-        index: resolve(__dirname, 'packages/index.ts')
+        index: resolve(__dirname, 'packages/components/index.ts')
       },
       output: {
         globals: {
           vue: 'Vue'
         },
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name?.endsWith('.css')) return 'theme/yh-ui.css';
-          return 'assets/[name]-[hash][extname]';
-        },
+        assetFileNames: 'theme-chalk/[name].css',
         exports: 'named'
       }
     }

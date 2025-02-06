@@ -11,6 +11,7 @@ export default function useClickOutside(
       }
     }
   };
+
   onMounted(() => {
     document.addEventListener('click', handler);
   });
