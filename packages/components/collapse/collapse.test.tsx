@@ -11,7 +11,6 @@ describe('Collapse.vue', () => {
       },
       slots: {
         default: (
-          // @ts-ignore
           <>
             <CollapseItem name="a" title="title a">
               content a
