@@ -15,8 +15,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - uses: pnpm/action-setup@v2.1.0
-        with:
-          version: 7.2.1
       - name: Install modules
         run: pnpm install
       - name: Run Lint
@@ -29,8 +27,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - uses: pnpm/action-setup@v2.1.0
-        with:
-          version: 7.2.1
       - name: Install modules
         run: pnpm install
       - name: Run Test
