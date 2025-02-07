@@ -28,6 +28,7 @@
   ],
   "scripts": {
     "test": "vitest",
+    "test:run": "vitest run",
     "dev": "vite ",
     "build": "cd script && node build.js",
     "start": "pnpm run docs:dev",
