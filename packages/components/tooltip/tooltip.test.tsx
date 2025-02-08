@@ -103,6 +103,11 @@ describe('tooltip', () => {
     await wrapper.setProps({ manual: false });
     expect(vm.events['mouseenter']).toBeDefined();
     expect(vm.outerEvents['mouseleave']).toBeDefined();
+
+    // 开启手动触发
+    await wrapper.setProps({ manual: true });
+    expect(vm.events['mouseenter']).toBeUndefined();
+    expect(vm.outerEvents['mouseleave']).toBeUndefined();
   });
   test('tooltip destroy', async () => {
     const wrapper = mount(Tooltip, {
