@@ -1,6 +1,8 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import { nextTick } from 'vue';
 import { createMessage, closeAll } from './method';
+import { mount } from '@vue/test-utils';
+import Message from './Message.vue';
 
 export const rAF = async () => {
   return new Promise((res) => {
@@ -17,15 +19,33 @@ function getTopValue(element: Element) {
   const topValue = styles.getPropertyValue('top');
   return Number.parseFloat(topValue);
 }
+function createWrapper(props?) {
+  return mount(Message, {
+    props: {
+      message: 'message',
+      showClose: true,
+      onDestroy: vi.fn(),
+      zIndex: 2000,
+      onClose: vi.fn(),
+      id: 'message_0',
+      duration: 3000,
+      ...props
+    },
+    global: {
+      stubs: ['Icon']
+    },
+    attachTo: document.body
+  });
+}
 describe('createMessage', () => {
   test('调用方法应该创建对应的 Message 组件', async () => {
     const instance = createMessage({ message: 'hello world', duration: 0 });
     await rAF();
-    console.log('html', document.body.innerHTML);
+    // console.log('html', document.body.innerHTML);
     expect(document.querySelector('.yh-message')).toBeTruthy();
     instance.destroy();
     await rAF();
-    console.log('html2', document.body.innerHTML);
+    // console.log('html2', document.body.innerHTML);
     expect(document.querySelector('.yh-message')).toBeFalsy();
   });
   test('多次调用方法应该创建多个实例', async () => {
@@ -41,6 +61,7 @@ describe('createMessage', () => {
   test('创建多个实例应该设置正确的 offset', async () => {
     createMessage({ message: 'hello world', duration: 0, offset: 100 });
     createMessage({ message: 'hello world 2', duration: 0, offset: 50 });
+
     await rAF();
     const elements = document.querySelectorAll('.yh-message');
     expect(elements.length).toBe(2);
@@ -50,5 +71,44 @@ describe('createMessage', () => {
     // 在JS-dom 中，对应的 height 返回为零
     expect(firstElementTop).toBe(100);
     expect(secondElementTop).toBe(150);
+    closeAll();
+    await rAF();
+  });
+  test('测试closemark关闭', async () => {
+    const wrapper = createWrapper();
+
+    const closeButton = wrapper.find('.yh-message__closemark');
+    expect(closeButton.exists()).toBeTruthy();
+    closeButton.trigger('click');
+    expect(wrapper.vm.visible).toBe(false);
+  });
+  test('startTimer and cleaTimer', async () => {
+    vi.useFakeTimers();
+    // startTimer
+    const startTimer = createWrapper();
+    expect(startTimer.vm.visible).toBeTruthy();
+
+    await vi.advanceTimersByTime(3000);
+
+    expect(startTimer.vm.visible).toBeFalsy();
+
+    // clearTimer
+    const clearTimer = createWrapper();
+
+    expect(clearTimer.vm.visible).toBeTruthy();
+    await clearTimer.find('.yh-message').trigger('mouseenter');
+    await vi.advanceTimersByTime(3000);
+    expect(clearTimer.vm.visible).toBeTruthy();
+  });
+  test('keydown esc', async () => {
+    const wrapper = createWrapper();
+
+    expect(wrapper.vm.visible).toBeTruthy();
+
+    await wrapper.trigger('keydown', {
+      keyCode: 'Escape' as any
+    });
+
+    expect(wrapper.vm.visible).toBeFalsy();
   });
 });

@@ -136,6 +136,7 @@
 
   onUnmounted(() => {
     popperInstance?.destroy();
+    console.log('first');
   });
 
   defineExpose<tooltipInstance>({

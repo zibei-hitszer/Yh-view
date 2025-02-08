@@ -4,10 +4,11 @@ import Collapse from './Collapse.vue';
 import CollapseItem from './CollapseItem.vue';
 
 describe('Collapse.vue', () => {
-  test('basic collapse', async () => {
-    const wrapper = mount(Collapse, {
+  function createWrapper(props?) {
+    return mount(Collapse, {
       props: {
-        modelValue: ['a']
+        modelValue: ['a'],
+        ...props
       },
       slots: {
         default: (
@@ -29,7 +30,9 @@ describe('Collapse.vue', () => {
       },
       attachTo: document.body
     });
-    // console.log(wrapper.html())
+  }
+  test('basic collapse', async () => {
+    const wrapper = createWrapper();
     const headers = wrapper.findAll('.yh-collapse-item__header');
     const contents = wrapper.findAll('.yh-collapse-item__wrapper');
 
@@ -68,5 +71,20 @@ describe('Collapse.vue', () => {
     await disableHeader.trigger('click');
 
     expect(disabledContent.isVisible()).toBeFalsy();
+
+    // 手动改变modelValue
+    wrapper.setProps({ modelValue: [] });
+    expect(firstContent.isVisible()).toBeFalsy();
+  });
+  test('accordion collapse', async () => {
+    const wrapper = createWrapper({ accordion: true });
+
+    const headers = wrapper.findAll('.yh-collapse-item__header');
+    const contents = wrapper.findAll('.yh-collapse-item__wrapper');
+
+    await headers[1].trigger('click');
+
+    expect(contents[0].isVisible()).toBeFalsy();
+    expect(contents[1].isVisible()).toBeTruthy();
   });
 });
