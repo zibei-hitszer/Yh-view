@@ -7,6 +7,9 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    watch: false
+    coverage: {
+      provider: 'istanbul',
+      reporter: ['text', 'json', 'html']
+    }
   }
 });

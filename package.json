@@ -29,6 +29,7 @@
   "scripts": {
     "test": "vitest",
     "test:run": "vitest run",
+    "coverage": "vitest run --coverage",
     "dev": "vite ",
     "build": "cd script && node build.js",
     "start": "pnpm run docs:dev",
@@ -52,6 +53,9 @@
       "prettier --write"
     ]
   },
+  "nyc": {
+    "include": ["packages/components"]
+  },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@types/lodash-es": "^4.17.12",
@@ -62,6 +66,7 @@
     "@vitejs/plugin-vue-jsx": "^4.1.1",
     "@vitepress-demo-preview/component": "^2.3.2",
     "@vitepress-demo-preview/plugin": "^1.2.3",
+    "@vitest/coverage-istanbul": "3.0.3",
     "@vue/test-utils": "^2.4.6",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
