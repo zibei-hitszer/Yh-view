@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 import withInstall from '../withInstall';
 import Button from '../../components/button/Button.vue';
 import { createApp } from 'vue';
-import App from 'examples/app.vue';
+import App from '../../../examples/app.vue';
 import { install } from '../../components';
 
 describe('withInstall', () => {
