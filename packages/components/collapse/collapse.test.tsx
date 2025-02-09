@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils';
 import Collapse from './Collapse.vue';
 import CollapseItem from './CollapseItem.vue';
 
-describe('Collapse.vue', () => {
+describe('Collapse', () => {
   function createWrapper(props?) {
     return mount(Collapse, {
       props: {
@@ -33,6 +33,7 @@ describe('Collapse.vue', () => {
   }
   test('basic collapse', async () => {
     const wrapper = createWrapper();
+    console.log(wrapper.html());
     const headers = wrapper.findAll('.yh-collapse-item__header');
     const contents = wrapper.findAll('.yh-collapse-item__wrapper');
 

@@ -19,3 +19,20 @@
 ```bash
 npm i yh-view
 ```
+
+## Quick Start
+
+```js
+import Vue from 'vue'
+import yhView from 'yh-view'
+
+const App = {
+    template: `
+        <YhButton/>
+    `,
+};
+
+createApp(App)
+    .use(yhView)
+    .mount("#app");
+```

@@ -2,7 +2,6 @@ import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import Tooltip from './Tooltip.vue';
 import Button from '../button/Button.vue';
-import { createPopper } from '@popperjs/core';
 
 vi.mock('@popperjs/core', () => ({
   createPopper: vi.fn(() => ({
