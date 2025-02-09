@@ -1,4 +1,4 @@
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import Collapse from './Collapse.vue';
 import CollapseItem from './CollapseItem.vue';

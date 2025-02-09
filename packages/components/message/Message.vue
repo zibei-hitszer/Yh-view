@@ -37,7 +37,7 @@
   import { getLastOffset } from './method';
   import { useEventListener } from '@yh-ui/utils';
   defineOptions({
-    name: 'Yh-message'
+    name: 'YhMessage'
   });
   const props = withDefaults(defineProps<messageProps>(), {
     duration: 3000,
