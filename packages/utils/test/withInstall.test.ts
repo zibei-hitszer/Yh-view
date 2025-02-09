@@ -2,7 +2,6 @@ import { describe, expect, test } from 'vitest';
 import withInstall from '../withInstall';
 import Button from '../../components/button/Button.vue';
 import { createApp } from 'vue';
-import App from '../../../examples/app.vue';
 import { install } from '../../components';
 
 describe('withInstall', () => {
@@ -12,7 +11,7 @@ describe('withInstall', () => {
   });
 
   test('installAll', () => {
-    const app = createApp(App);
+    const app = createApp({});
     const componentNames = [
       'YhButton',
       'YhCollapse',
