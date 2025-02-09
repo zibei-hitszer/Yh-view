@@ -17,7 +17,7 @@
       <slot name="title">{{ title }}</slot>
       <div class="header-angle"><Icon icon="angle-right"></Icon></div>
     </div>
-    <Transition name="slide" v-on="TransitionEvents" @before-leave="console.log">
+    <Transition name="slide" v-on="TransitionEvents">
       <div class="yh-collapse-item__wrapper" v-show="isActive">
         <div class="yh-collapse-item__content" :id="`item-content-${name}`">
           <slot></slot>
