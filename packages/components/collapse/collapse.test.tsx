@@ -2,6 +2,18 @@ import { describe, test, expect, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import Collapse from './Collapse.vue';
 import CollapseItem from './CollapseItem.vue';
+import { h, nextTick, render } from 'vue';
+
+export const rAF = async () => {
+  return new Promise((res) => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(async () => {
+        res(null);
+        await nextTick();
+      });
+    });
+  });
+};
 
 describe('Collapse', () => {
   function createWrapper(props?) {
@@ -87,5 +99,59 @@ describe('Collapse', () => {
 
     expect(contents[0].isVisible()).toBeFalsy();
     expect(contents[1].isVisible()).toBeTruthy();
+  });
+  test('collapseItem transition', async () => {
+    // 1. 创建完整组件树
+    const wrapper = mount(
+      {
+        components: { Collapse, CollapseItem },
+        template: `
+      <Collapse v-model="value">
+        <CollapseItem name="a" />
+      </Collapse>
+    `,
+        data() {
+          return { value: ['a'] };
+        }
+      },
+      {
+        global: {
+          stubs: {
+            // 关键配置：禁用 Transition 组件的自动存根
+            Transition: false
+          }
+        }
+      }
+    );
+
+    // 2. 获取组件实例
+    const itemInstance = wrapper.findComponent(CollapseItem).vm as any;
+
+    // 3. 创建事件监听 spy
+    const events = itemInstance.TransitionEvents;
+    const spyBeforeEnter = vi.spyOn(events, 'beforeEnter');
+    const spyEnter = vi.spyOn(events, 'enter');
+    const spyAfterEnter = vi.spyOn(events, 'afterEnter');
+    const spyBeforeLeave = vi.spyOn(events, 'beforeLeave');
+    const spyLeave = vi.spyOn(events, 'leave');
+    const spyAfterLeave = vi.spyOn(events, 'leave');
+
+    // 4. 触发状态变更
+    await wrapper.setData({ value: [] });
+
+    // 5. 等待所有异步操作
+    await rAF(); // 等待动画帧
+
+    // 6. 验证回调执行
+    expect(spyBeforeLeave).toHaveBeenCalled();
+    expect(spyLeave).toHaveBeenCalled();
+    expect(spyAfterLeave).toHaveBeenCalled();
+
+    await wrapper.setData({ value: ['a'] });
+    await rAF();
+
+    expect(spyBeforeEnter).toHaveBeenCalled();
+    expect(spyEnter).toHaveBeenCalled();
+    expect(spyAfterEnter).toHaveBeenCalled();
   });
 });
